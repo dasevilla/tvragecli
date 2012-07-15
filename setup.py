@@ -50,7 +50,7 @@ setup(
     scripts=[],
 
     provides=[],
-    install_requires=['distribute', 'cliff'],
+    install_requires=['distribute', 'cliff', 'tvrage'],
 
     namespace_packages=[],
     packages=find_packages(),
