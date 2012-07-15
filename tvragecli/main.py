@@ -18,7 +18,7 @@ class TVRageApp(App):
             command_manager=CommandManager('tvrage.cli'),
             )
 
-        self.tvrage_api_key = os.environ['TVRAGE_API_KEY']
+        self.tvrage_api_key = os.environ['TV_RAGE_API_KEY']
 
     def initialize_app(self, argv):
         self.log.debug('initialize_app')
