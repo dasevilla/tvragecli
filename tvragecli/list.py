@@ -1,5 +1,4 @@
 import logging
-import os
 
 from cliff.lister import Lister
 
@@ -13,15 +12,14 @@ class EpisodeList(Lister):
         parser = super(EpisodeList, self).get_parser(prog_name)
         parser.add_argument('--show', help='show id', required=True)
         parser.add_argument('--season', help='season number', required=True,
-            type=int)
+                            type=int)
         return parser
-
 
     def take_action(self, parsed_args):
 
         r = self.app.client.get_episode_list(parsed_args.show)
 
-        season = r.seasons[parsed_args.season-1]
+        season = r.seasons[parsed_args.season - 1]
 
         columns = (
             'title',
@@ -51,7 +49,6 @@ class ShowSearchList(Lister):
         parser = super(ShowSearchList, self).get_parser(prog_name)
         parser.add_argument('show', help='show name')
         return parser
-
 
     def take_action(self, parsed_args):
 

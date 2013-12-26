@@ -37,13 +37,12 @@ setup(
     entry_points={
         'console_scripts': [
             'tvragecli = tvragecli.main:main'
-            ],
+        ],
         'tvrage.cli': [
             'epinfo = tvragecli.show:EpisodeInfo',
             'showinfo = tvragecli.show:ShowInfo',
             'eplist = tvragecli.list:EpisodeList',
             'search = tvragecli.list:ShowSearchList',
-            ],
-        },
-
-    )
+        ],
+    },
+)

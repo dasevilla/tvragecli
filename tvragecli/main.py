@@ -16,7 +16,7 @@ class TVRageApp(App):
             description='Command line client for TV Rage',
             version='0.1',
             command_manager=CommandManager('tvrage.cli'),
-            )
+        )
 
         self.tvrage_api_key = os.environ['TV_RAGE_API_KEY']
 

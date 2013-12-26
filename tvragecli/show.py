@@ -1,5 +1,4 @@
 import logging
-import os
 
 from cliff.show import ShowOne
 
@@ -13,16 +12,18 @@ class EpisodeInfo(ShowOne):
         parser = super(EpisodeInfo, self).get_parser(prog_name)
         parser.add_argument('--show', help='show id', required=True)
         parser.add_argument('--season', help='season number', required=True,
-            type=int)
+                            type=int)
         parser.add_argument('--episode', help='episode number', required=True,
-            type=int)
+                            type=int)
         return parser
-
 
     def take_action(self, parsed_args):
 
-        r = self.app.client.get_episodeinfo(parsed_args.show,
-                parsed_args.season, parsed_args.episode)
+        r = self.app.client.get_episodeinfo(
+            parsed_args.show,
+            parsed_args.season,
+            parsed_args.episode
+        )
 
         columns = r.episode.keys()
         data = r.episode.values()
@@ -39,7 +40,6 @@ class ShowInfo(ShowOne):
         parser = super(ShowInfo, self).get_parser(prog_name)
         parser.add_argument('show', help='show id')
         return parser
-
 
     def take_action(self, parsed_args):
 
