@@ -14,8 +14,8 @@ class TVRageApp(App):
     def __init__(self):
         super(TVRageApp, self).__init__(
             description='Command line client for TV Rage',
-            version='0.1',
-            command_manager=CommandManager('tvrage.cli'),
+            version='0.1.0',
+            command_manager=CommandManager('tvragecli'),
         )
 
         self.tvrage_api_key = os.environ['TV_RAGE_API_KEY']

@@ -38,7 +38,7 @@ setup(
         'console_scripts': [
             'tvragecli = tvragecli.main:main'
         ],
-        'tvrage.cli': [
+        'tvragecli': [
             'epinfo = tvragecli.show:EpisodeInfo',
             'showinfo = tvragecli.show:ShowInfo',
             'eplist = tvragecli.list:EpisodeList',
