@@ -1,6 +1,8 @@
 import logging
+import os
 
 from cliff.lister import Lister
+import tvrage
 
 
 class EpisodeList(Lister):
@@ -10,14 +12,15 @@ class EpisodeList(Lister):
 
     def get_parser(self, prog_name):
         parser = super(EpisodeList, self).get_parser(prog_name)
+        self.app.add_default_args(parser)
         parser.add_argument('--show', help='show id', required=True)
         parser.add_argument('--season', help='season number', required=True,
                             type=int)
         return parser
 
     def take_action(self, parsed_args):
-
-        r = self.app.client.get_episode_list(parsed_args.show)
+        client = tvrage.TVRage(api_key=parsed_args.api_key)
+        r = client.get_episode_list(parsed_args.show)
 
         season = r.seasons[parsed_args.season - 1]
 
@@ -47,12 +50,13 @@ class ShowSearchList(Lister):
 
     def get_parser(self, prog_name):
         parser = super(ShowSearchList, self).get_parser(prog_name)
+        self.app.add_default_args(parser)
         parser.add_argument('show', help='show name')
         return parser
 
     def take_action(self, parsed_args):
-
-        r = self.app.client.search(parsed_args.show)
+        client = tvrage.TVRage(api_key=parsed_args.api_key)
+        r = client.search(parsed_args.show)
 
         columns = (
             'name',

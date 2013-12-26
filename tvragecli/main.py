@@ -4,7 +4,6 @@ import os
 
 from cliff.app import App
 from cliff.commandmanager import CommandManager
-import tvrage
 
 
 class TVRageApp(App):
@@ -18,20 +17,13 @@ class TVRageApp(App):
             command_manager=CommandManager('tvragecli'),
         )
 
-        self.tvrage_api_key = os.environ['TV_RAGE_API_KEY']
-
-    def initialize_app(self, argv):
-        self.log.debug('initialize_app')
-        self.client = tvrage.TVRage(api_key=self.tvrage_api_key)
-
-    def prepare_to_run_command(self, cmd):
-        self.log.debug('prepare_to_run_command %s', cmd.__class__.__name__)
-
-    def clean_up(self, cmd, result, err):
-        self.log.debug('clean_up %s', cmd.__class__.__name__)
-        if err:
-            self.log.debug('got an error: %s', err)
-
+    def add_default_args(self, parser):
+        parser.add_argument(
+            '--api-key',
+            help='TVRage api key',
+            required=False,
+            default=os.getenv('TV_RAGE_API_KEY')
+        )
 
 def main(argv=sys.argv[1:]):
     myapp = TVRageApp()

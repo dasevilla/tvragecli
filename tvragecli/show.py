@@ -1,6 +1,8 @@
 import logging
+import os
 
 from cliff.show import ShowOne
+import tvrage
 
 
 class EpisodeInfo(ShowOne):
@@ -10,6 +12,7 @@ class EpisodeInfo(ShowOne):
 
     def get_parser(self, prog_name):
         parser = super(EpisodeInfo, self).get_parser(prog_name)
+        self.app.add_default_args(parser)
         parser.add_argument('--show', help='show id', required=True)
         parser.add_argument('--season', help='season number', required=True,
                             type=int)
@@ -18,8 +21,8 @@ class EpisodeInfo(ShowOne):
         return parser
 
     def take_action(self, parsed_args):
-
-        r = self.app.client.get_episodeinfo(
+        client = tvrage.TVRage(api_key=parsed_args.api_key)
+        r = client.get_episodeinfo(
             parsed_args.show,
             parsed_args.season,
             parsed_args.episode
@@ -38,12 +41,13 @@ class ShowInfo(ShowOne):
 
     def get_parser(self, prog_name):
         parser = super(ShowInfo, self).get_parser(prog_name)
+        self.app.add_default_args(parser)
         parser.add_argument('show', help='show id')
         return parser
 
     def take_action(self, parsed_args):
-
-        r = self.app.client.get_showinfo(parsed_args.show)
+        client = tvrage.TVRage(api_key=parsed_args.api_key)
+        r = client.get_showinfo(parsed_args.show)
 
         columns = [
             'showname',
